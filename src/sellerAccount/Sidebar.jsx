@@ -5,6 +5,7 @@ import { MdAccountCircle } from "react-icons/md";
 import { TbCircleNumber1 } from "react-icons/tb";
 import { TbCircleNumber2 } from "react-icons/tb";
 import { TbCircleNumber3 } from "react-icons/tb";
+import { SiBookstack } from "react-icons/si";
 import { Link } from "react-router-dom";
 import { TbLayoutSidebarLeftCollapseFilled } from "react-icons/tb";
 import { TbLayoutSidebarRightCollapseFilled } from "react-icons/tb";
@@ -53,10 +54,7 @@ const Sidebar = () => {
         <hr className="" />
         <div className="flex flex-col gap-10 justify-between p-4">
           <nav className="flex flex-col gap-3 mt-8">
-            <Link
-              to="#"
-              className="flex gap-4 items-center cursor-pointer"
-            >
+            <Link to="#" className="flex gap-4 items-center cursor-pointer">
               <IoMdHome />
               DASHBOARD
             </Link>
@@ -68,9 +66,13 @@ const Sidebar = () => {
               UPLOAD
             </Link>
             <Link
-              to="#"
+              to="/seller/all-books"
               className="flex gap-4 items-center cursor-pointer"
             >
+              <SiBookstack />
+              MANAGE BOOKS
+            </Link>
+            <Link to="#" className="flex gap-4 items-center cursor-pointer">
               <MdOutlinePayment />
               PAYMENT
             </Link>
@@ -92,7 +94,7 @@ const Sidebar = () => {
             </div>
             <TbLayoutSidebarLeftCollapseFilled
               onClick={collapseHandler}
-              className="absolute sm:hidden -right-12 top-8 text-4xl cursor-pointer text-blue-50 bg-gray-800 rounded-lg"
+              className="absolute -right-10 top-8 text-4xl cursor-pointer text-blue-50 bg-gray-800 rounded-lg"
             />
           </div>
 
@@ -114,12 +116,12 @@ const Sidebar = () => {
         </div>
 
         {/* ======================= Collapse button ====================== */}
-        <div className="absolute top-1/3 -right-6 sm-max:hidden">
+        {/* <div className="absolute top-1/3 -right-2 t-0 ">
           <TbLayoutSidebarLeftCollapseFilled
             onClick={collapseHandler}
             className="text-4xl cursor-pointer text-blue-50 bg-gray-800 rounded-lg"
           />
-        </div>
+        </div> */}
       </div>
     </div>
   );

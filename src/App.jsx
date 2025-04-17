@@ -18,6 +18,8 @@ import SellerAccount from "./sellerAccount/SellerAccount";
 import UploadBook from "./sellerAccount/UploadBook";
 import { useDispatch } from "react-redux";
 import { fetchCurrentUser } from "./redux/slices/authThunk";
+import ManageBooks from "./sellerAccount/ManageBooks";
+import UpdateBook from "./sellerAccount/UpdateBook";
 
 function App() {
   const dispatch = useDispatch();
@@ -46,6 +48,8 @@ function App() {
         <Route path="/library" element={<LibraryContainer />} />
         <Route path="/seller" element={<SellerAccount />}>
           <Route path="upload-book" element={<UploadBook />} />
+          <Route path="all-books" element={<ManageBooks />} />
+          <Route path="update-book" element={<UpdateBook />} />
         </Route>
       </Routes>
       <Footer />

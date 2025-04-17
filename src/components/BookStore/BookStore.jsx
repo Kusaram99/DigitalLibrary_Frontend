@@ -1,8 +1,36 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Books from "./Books";
+import axios from "../../utils/axiosInstance";
+import { useSelector } from "react-redux";
 // import BookStoreHeader from "./BookStoreHeader";
 
 const BookStore = () => {
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  // react state
+  const [booksData, setBooksData] = useState([]);
+  const [loading, seLoading] = useState(false);
+
+  // fetch all books
+  const fetBooksData = async () => {
+    try {
+      seLoading(true); // start loading
+      const response = await axios.get(import.meta.env.VITE_GET_ALL_BOOKS_URL); // sending request
+      console.log("response: ", response.data.books);
+      setBooksData(response.data.books); // updating data state
+    } catch (err) {
+      alert("Somthig is wrong during the fetching data from server!");
+      console.log("Error: ", err);
+    } finally {
+      seLoading(false);
+    }
+  };
+
+  // send request to server when component didmount
+  useEffect(() => {
+    fetBooksData();
+  }, []);
+
   return (
     <div className="my-[54px] md:w-10/12 xs:w-[80%] w-[85%] mx-auto dark:text-gray-300">
       {/* --------------------- Filter --------------------- */}
@@ -27,8 +55,21 @@ const BookStore = () => {
           </select>
         </div>
       </div>
+
+      <div className="mt-5">
+        {loading && (
+          <p className="text-center font-semibold text-gray-800 dark:text-gray-100">
+            Loading...
+          </p>
+        )}
+      </div>
       {/* -------------------- Books ---------------- */}
-      <Books />
+
+      <div className="grid md:grid-cols-4 sm:grid-cols-2 grid-cols-1 justify-center px-4 gap-x-8 md:gap-y-20 gap-y-12 ">
+        {booksData.map((book) => (
+          <Books book={book} key={book._id} />
+        ))}
+      </div>
     </div>
   );
 };
